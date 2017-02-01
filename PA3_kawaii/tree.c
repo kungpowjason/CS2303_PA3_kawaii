@@ -8,15 +8,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define INCORECT_SUBTREE_TYPE 2
+#include "tree.h"
 
-#define UNABLE_TO_ALLOCATE_MEMORY 1
-struct tnode{
-	struct tnode *left; //left child
-	struct tnode *right;//right child
-	char *word;
-	int count;
-};
 //Allocates memory for a node on the tree. Returns pointer to allocated space.
 struct tnode *mallocNode(){
 	struct tnode *root = (struct tnode *) malloc(sizeof(struct tnode));
@@ -79,14 +72,14 @@ int containsWord(struct tnode * root, char* string){
 		return getWordCount(root->right, string);
 }//int containsWord(struct tnode * root, char* word)
 
-
-int main(){
-	struct tnode *proot = NULL;
-
-	proot = addWord("e", proot);
-	proot = addWord("d", proot);
-	proot = addWord("c", proot);
-	proot = addWord("b", proot);
-	proot = addWord("a", proot);
-	return 0;
+/**
+ * @brief Prints the tree of the given node
+ * @param root
+ */
+void printTree(struct tnode *root){
+   if(root == NULL)
+     return;
+   printTree(root -> left);
+   printf("%20.20s %d\n",root -> word, root -> count);
+   printTree(root ->right);
 }

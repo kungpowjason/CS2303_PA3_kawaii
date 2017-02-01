@@ -2,11 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include "wordparse.h"
+#include "tree.h"
 
 int main(int argc, char *argv[]) {
 
 	FILE *file_input; // declare file pointer
 	char **word_arr; // declare 2D pointer bin
+	struct tnode *proot = NULL;
+	int word_cnt = 0;
 
 	alloc_mem_2D(&word_arr); // allocate memory for word_arr
 
@@ -27,13 +30,20 @@ int main(int argc, char *argv[]) {
 			}
 			// split text file into substrings and puts into word_arr
 			// word_cnt is the returned number of words found.
-			int word_cnt = textToSubstrings(file_input, word_arr);
+			word_cnt = textToSubstrings(file_input, word_arr);
 			// print all the words found.
 			for (int i = 0; i < word_cnt; i++) {
 				printf("%s\n", word_arr[i]);
 			}
-			printf("The program found %d words.", word_cnt);
+			printf("The program found %d words.\n", word_cnt);
 			fclose(file_input);
 		}
 	}
+	// adds all the words into a binary tree
+	for (int i = 0; i < word_cnt; i++){
+		proot = addWord(word_arr[i], proot);
+	}
+	// print tree
+	printTree(proot);
 }
+

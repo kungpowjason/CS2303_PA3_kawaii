@@ -1,5 +1,6 @@
 
 #include <stdio.h>
+#include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
 #include "wordparse.h"
@@ -58,7 +59,7 @@ int stripPunctuation(char *c, char *buf) {
 			if ((i == 0 || (i == str_len - 1)) && strchr(".,?-;:()[]!\"\'", c[i]) != NULL) {
 			}
 			else {
-				*(str_new + index) = c[i];
+				*(str_new + index) = tolower(c[i]);
 				index++;
 			}
 		}
