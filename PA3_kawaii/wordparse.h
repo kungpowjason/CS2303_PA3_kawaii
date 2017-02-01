@@ -5,7 +5,7 @@
 #define MAX_WORD_LENGTH 20
 #define MAX_WORDS 500
 
-int textToSubstrings(FILE *fp, char ***list_2D);
+int textToSubstrings(FILE *fp, char **list_2D);
 int stripPunctuation(char *c, char *buf);
 void alloc_mem_2D(char ***arr);
 
