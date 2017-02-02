@@ -210,7 +210,7 @@ Tnode *balanceTree(Tnode *root){
 }
 
 //Adds a word to the tree. Returns a pointer to the root to the tree.
-Tnode *addWord(char* string, Tnode *root, int *addedNew){
+Tnode *oldAddWord(char* string, Tnode *root, int *addedNew){
 
 	if(root == NULL){
 		root = mallocNode();
@@ -270,30 +270,32 @@ int containsWord(Tnode * root, char* string){
 		return getWordCount(root->right, string);
 }//int containsWord(Tnode * root, char* word)
 
-//Prints graph
-void printTree(Tnode *root){
-
-	if(root != NULL){
-		printTree(root->left);
-		printf("%d	%s\n",root->count, root->word);
-		printTree(root->right);
-	}
+/**
+ * @brief Prints the tree of the given node
+ * @param root
+ */
+void printTree(struct tnode *root){
+   if(root == NULL)
+     return;
+   printTree(root -> left);
+   printf("%20.20s %d\n",root -> word, root -> count);
+   printTree(root ->right);
 }//int printGraph(Tnode *root)
 
 //adding a new word for AVL tree
-Tnode *addWordAVL(char *string, Tnode *root){
+Tnode *addWord(char *string, Tnode *root){
 	int addedNew = 0;
 
-	root = addWord(string, root, &addedNew);
+	root = oldAddWord(string, root, &addedNew);
 	root = balanceTree(root);
 	return root;
-}//Tnode *addWordAVL(char *string, Tnode *root)
+}//Tnode *addWord(char *string, Tnode *root)
 int test1(){
 	Tnode *root = NULL;
 
-	root = addWordAVL("a", root);
-	root = addWordAVL("b", root);
-	root = addWordAVL("c", root);
+	root = addWord("a", root);
+	root = addWord("b", root);
+	root = addWord("c", root);
 	printf("Left: %d, Right:%d\n",root->leftLength, root->rightLength);
 	printTree(root);
 	printf("\n");
@@ -302,11 +304,11 @@ int test1(){
 int test2(){
 	Tnode *root = NULL;
 
-	root = addWordAVL("d", root);
-	root = addWordAVL("e", root);
-	root = addWordAVL("c", root);
-	root = addWordAVL("b", root);
-	root = addWordAVL("a", root);
+	root = addWord("d", root);
+	root = addWord("e", root);
+	root = addWord("c", root);
+	root = addWord("b", root);
+	root = addWord("a", root);
 	root = balanceTree(root);
 	printf("Left: %d, Right:%d\n",root->leftLength, root->rightLength);
 	printTree(root);
@@ -315,11 +317,11 @@ int test2(){
 }
 int test3() {
 	Tnode *root = NULL;
-	root = addWordAVL("e", root);
-	root = addWordAVL("b", root);
-	root = addWordAVL("c", root);
-	root = addWordAVL("b", root);
-	root = addWordAVL("a", root);
+	root = addWord("e", root);
+	root = addWord("b", root);
+	root = addWord("c", root);
+	root = addWord("b", root);
+	root = addWord("a", root);
 	//root = balanceTree(root);
 	printf("Left: %d, Right:%d\n",root->leftLength, root->rightLength);
 	printTree(root);
@@ -328,15 +330,15 @@ int test3() {
 }
 int test4() {
 	Tnode *root = NULL;
-	root = addWordAVL("e", root);
-	root = addWordAVL("f", root);
-	root = addWordAVL("c", root);
-	root = addWordAVL("d", root);
-	root = addWordAVL("b", root);
-	root = addWordAVL("a", root);
-	root = addWordAVL("a", root);
-	root = addWordAVL("a", root);
-	root = addWordAVL("a", root);
+	root = addWord("e", root);
+	root = addWord("f", root);
+	root = addWord("c", root);
+	root = addWord("d", root);
+	root = addWord("b", root);
+	root = addWord("a", root);
+	root = addWord("a", root);
+	root = addWord("a", root);
+	root = addWord("a", root);
 	printf("Left: %d, Right:%d\n",root->leftLength, root->rightLength);
 	printTree(root);
 	printf("\n");
@@ -349,3 +351,4 @@ int test4() {
 	test4();
 
 }*/
+
