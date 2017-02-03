@@ -9,7 +9,7 @@
 #	make              --  Same as "make PA3"
 #
 
-CFLAGS = -g -Wall
+CFLAGS = -g0 -Wall
 
 PA3: PA3.o wordparse.o tree.o
 	gcc $(CFLAGS) PA3.o wordparse.o  tree.o -o PA3
