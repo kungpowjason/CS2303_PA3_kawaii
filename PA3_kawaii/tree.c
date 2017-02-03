@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "wordparse.h"
 #include "tree.h"
 
 //Allocates memory for a node on the tree. Returns pointer to allocated space.
@@ -73,13 +74,18 @@ int containsWord(struct tnode * root, char* string){
 }//int containsWord(struct tnode * root, char* word)
 
 /**
- * @brief Prints the tree of the given node
- * @param root
+ * @brief Prints and writes the tree of the given node to output file.
+ * @param root The root node.
+ * @param f_out The file stream to write to.
  */
-void printTree(struct tnode *root){
+void printAndWriteTree(struct tnode *root, FILE * f_out){
    if(root == NULL)
      return;
-   printTree(root -> left);
-   printf("%20.20s %d\n",root -> word, root -> count);
-   printTree(root ->right);
+   printAndWriteTree(root -> left, f_out);
+   printf("%10.0d  %s \n", root -> count, root -> word);
+   fprintf (f_out, "%-10.0d  %s \n", root -> count, root -> word);
+   printAndWriteTree(root ->right, f_out);
 }
+
+
+

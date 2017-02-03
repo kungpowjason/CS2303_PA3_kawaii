@@ -23,6 +23,6 @@ wordparse.o: wordparse.h wordparse.c
 tree.o: tree.h tree.c
 	gcc $(CFLAGS) -c tree.c
 clean:
-	rm -f PA3.o wordparse.o PA3
+	rm -f PA3.o wordparse.o tree.o PA3
 
 all: PA3

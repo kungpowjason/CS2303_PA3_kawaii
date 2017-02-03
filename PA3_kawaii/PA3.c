@@ -7,6 +7,8 @@
 int main(int argc, char *argv[]) {
 
 	FILE *file_input; // declare file pointer
+	FILE *file_output; // declare file pointer
+
 	char **word_arr; // declare 2D pointer bin
 	struct tnode *proot = NULL;
 	int word_cnt = 0;
@@ -35,7 +37,6 @@ int main(int argc, char *argv[]) {
 			for (int i = 0; i < word_cnt; i++) {
 				printf("%s\n", word_arr[i]);
 			}
-			printf("The program found %d words.\n", word_cnt);
 			fclose(file_input);
 		}
 	}
@@ -43,7 +44,12 @@ int main(int argc, char *argv[]) {
 	for (int i = 0; i < word_cnt; i++){
 		proot = addWord(word_arr[i], proot);
 	}
+	file_output = fopen(argv[1], "w");
 	// print tree
-	printTree(proot);
+	printAndWriteTree(proot, file_output);
+	printf("--------------------------------\n");
+	printf("The program found %d words.\n", word_cnt);
+	fclose(file_output);
+
 }
 
