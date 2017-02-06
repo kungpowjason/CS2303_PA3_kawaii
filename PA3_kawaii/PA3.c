@@ -33,9 +33,6 @@ int main(int argc, char *argv[]) {
 			// word_cnt is the returned number of words found.
 			word_cnt = textToSubstrings(file_input, word_arr);
 			// print all the words found.
-			for (int i = 0; i < word_cnt; i++) {
-				printf("%s\n", word_arr[i]);
-			}
 			fclose(file_input);
 		}
 	}
