@@ -17,10 +17,11 @@ struct tnode{
 	int count;
 };
 
-void printAndWriteTree(struct tnode *root,  FILE *f_out);
+void printTree(struct tnode *root);
 int containsWord(struct tnode * root, char* string);
 int getWordCount(struct tnode *root, char* string);
 struct tnode *mallocNode();
+void freeTree(struct tnode *root);
 struct tnode *addWord(char* string, struct tnode *root);
 
 

@@ -51,5 +51,7 @@ int main(int argc, char *argv[]) {
 	printf("The program found %d words.\n", word_cnt);
 	fclose(file_output);
 
+	freeTree(proot);
+	proot = NULL;
 }
 
