@@ -32,31 +32,19 @@ Tnode *mallocNode(){
 	return root;
 }//Tnode *mallocNode()
 
-/*Tnode *rotateSubTreeCounter(Tnode *root){// rotates a stick counter
-	Tnode *right = root->right;
-	Tnode *temp = root;
+//Frees memory allocated for tree
+void freeTree(Tnode *root){
+	if(root == NULL){
+		return;
+	}
+	freeTree(root->left);
+	root->left = NULL;
+	freeTree(root->left);
+	root->right = NULL;
+	freeTree(root->right);
 
-	temp->left = NULL;
-	temp->rightLength = 0;
-	root = right;
-	root->left = temp;
-	root->leftLength = 1;
-
-	return root;
-}//Tnode *roatateStickLCounter(Tnode *root)
-
-Tnode *rotateSubTreeClockwise(Tnode *root){//rotates a stick clockwise
-	Tnode *left = root->left;
-	Tnode *temp = root;
-
-	temp->right = NULL;
-	temp->leftLength = 0;
-	root = left;
-	root->right = temp;
-	root->rightLength = 1;
-
-	return root;
-}//Tnode *rotateStickClockwise(Tnode *root)*/
+	free(root);
+}//void freeTree(Tnode *root)
 
 //returns 1 if node has atleast 1 child
 int hasChildren(Tnode *root){
@@ -351,4 +339,3 @@ int test4() {
 	test4();
 
 }*/
-

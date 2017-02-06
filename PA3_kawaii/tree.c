@@ -8,7 +8,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "wordparse.h"
 #include "tree.h"
 
 //Allocates memory for a node on the tree. Returns pointer to allocated space.
@@ -20,6 +19,19 @@ struct tnode *mallocNode(){
 	return root;
 }//struct tnode *mallocNode()
 
+//Frees memory allocated for tree
+void freeTree(Tnode *root){
+	if(root == NULL){
+		return;
+	}
+	freeTree(root->left);
+	root->left = NULL;
+	freeTree(root->left);
+	root->right = NULL;
+	freeTree(root->right);
+
+	free(root);
+}//void freeTree(Tnode *root)
 
 //Adds a word to the tree. Returns a pointer to the root to the tree.
 struct tnode *addWord(char* string, struct tnode *root){
@@ -74,18 +86,13 @@ int containsWord(struct tnode * root, char* string){
 }//int containsWord(struct tnode * root, char* word)
 
 /**
- * @brief Prints and writes the tree of the given node to output file.
- * @param root The root node.
- * @param f_out The file stream to write to.
+ * @brief Prints the tree of the given node
+ * @param root
  */
-void printAndWriteTree(struct tnode *root, FILE * f_out){
+void printTree(struct tnode *root){
    if(root == NULL)
      return;
-   printAndWriteTree(root -> left, f_out);
-   printf("%10.0d  %s \n", root -> count, root -> word);
-   fprintf (f_out, "%-10.0d  %s \n", root -> count, root -> word);
-   printAndWriteTree(root ->right, f_out);
+   printTree(root -> left);
+   printf("%20.20s %d\n",root -> word, root -> count);
+   printTree(root ->right);
 }
-
-
-
