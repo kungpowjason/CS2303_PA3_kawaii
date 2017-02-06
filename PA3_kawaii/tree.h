@@ -22,6 +22,7 @@ void writeOutFileTree(struct tnode *root, FILE *f_out);
 int containsWord(struct tnode * root, char* string);
 int getWordCount(struct tnode *root, char* string);
 struct tnode *mallocNode();
+int numNodes(struct tnode* root, int start);
 void freeTree(struct tnode *root);
 struct tnode *addWord(char* string, struct tnode *root);
 
