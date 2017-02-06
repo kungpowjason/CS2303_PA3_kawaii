@@ -20,7 +20,7 @@ struct tnode *mallocNode(){
 }//struct tnode *mallocNode()
 
 //Frees memory allocated for tree
-void freeTree(Tnode *root){
+void freeTree(struct tnode *root){
 	if(root == NULL){
 		return;
 	}
