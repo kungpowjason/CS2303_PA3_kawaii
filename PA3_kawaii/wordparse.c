@@ -53,18 +53,42 @@ int stripPunctuation(char *c, char *buf) {
 	char *str_new = malloc(MAX_WORD_LENGTH * sizeof(char)); //alloc mem
 	int index = 0; // index of first char
 	int i = 0;
-	// section removes punctuation chars at the ends of the string
-	if (strlen > 0) {
-		for (i = 0; i < str_len ; i++) {
-			if ((i == 0 || (i == str_len - 1)) && strchr(".,?-;:()[]!\"\'", c[i]) != NULL) {
-			}
-			else {
-				*(str_new + index) = tolower(c[i]);
-				index++;
-			}
+	int end_pt = 0;
+	int start_pt = 0;
+	int end_flag = 0;
+	int start_flag = 0;
+	while (!start_flag || !end_flag){
+		if(!end_flag && strchr(".,?-;:()[]!\"\'", c[str_len - 1 - i]) != NULL){
 		}
-		*(str_new + index) = '\0'; // remember to put this at the end for the string
+		else{
+			end_pt = str_len - 1 - i;
+			end_flag = 1;
+		}
+		if(!start_flag && strchr(".,?-;:()[]!\"\'", c[i]) != NULL){
+		}
+		else{
+			start_pt = i;
+			start_flag = 1;
+		}
+		i++;
 	}
+	for (i = start_pt; i < end_pt + 1 ; i++) {
+			*(str_new + index) = tolower(c[i]);
+			index++;
+	}
+	*(str_new + index) = '\0'; // remember to put this at the end for the string
+//	// section removes punctuation chars at the ends of the string
+//	if (strlen > 0) {
+//		for (i = 0; i < str_len ; i++) {
+//			if ((i == 0 || (i == str_len - 1)) && strchr(".,?-;:()[]!\"\'", c[i]) != NULL) {
+//			}
+//			else {
+//				*(str_new + index) = tolower(c[i]);
+//				index++;
+//			}
+//		}
+//		*(str_new + index) = '\0'; // remember to put this at the end for the string
+//	}
 	strcpy(buf, str_new); // copy new string into buf
 	free(str_new); // free mem
 	return 0;
