@@ -53,7 +53,8 @@ int main(int argc, char *argv[]) {
 		writeOutFileTree(proot, file_output);
 	}
 	printf("--------------------------------\n");
-	printf("The program found %d words.\n", word_cnt);
+	printf("%10d Distinct words\n", numNodes(proot, 0));
+	printf("%10d Total words counted (including duplicates)\n", word_cnt);
 	fclose(file_output);
 
 	freeTree(proot);
