@@ -9,14 +9,14 @@
 #   make PA3          --  Regenerates the executable PA3 file by compiling     
 #	make              --  Same as "make PA3"
 #
-OBJS = PA3.o wordparse.o tree.o AVLTree.o timestamp.o
+OBJS = PA3.o wordparse.o AVLTree.o timestamp.o
 CFLAGS = -g0 -Wall
 
 PA3: $(OBJS)
 	gcc $(CFLAGS) $(OBJS) -o PA3
 	
-PA3.o: wordparse.h PA3.c wordparse.c tree.h tree.c AVLTree.h AVLTree.c timestamp.h timestamp.c
-	gcc $(CFLAGS) -c PA3.c wordparse.c tree.c timestamp.c AVLTree.c
+PA3.o: wordparse.h PA3.c wordparse.c AVLTree.h AVLTree.c timestamp.h timestamp.c
+	gcc $(CFLAGS) -c PA3.c wordparse.c AVLTree.c timestamp.c
 
 wordparse.o: wordparse.h wordparse.c
 	gcc $(CFLAGS) -c wordparse.c

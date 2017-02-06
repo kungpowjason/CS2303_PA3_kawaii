@@ -16,6 +16,17 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define UNABLE_TO_ALLOCATE_MEMORY 1
+
+struct tnode{
+	struct tnode *left; //left child
+	struct tnode *right;//right child
+	char *word;
+	int count;
+	int leftLength;// length of left subtree
+	int rightLength; // length of right subtree
+};
+
 typedef struct tnode Tnode;
 
 void printTree(struct tnode *root);
@@ -26,6 +37,7 @@ void freeTree(struct tnode *);
 int numNodes(struct tnode* root, int start);
 struct tnode *addWord(char* string, struct tnode *root);
 int getTotalCount(struct tnode* root, int start);
+void writeOutFileTree(struct tnode *root, FILE *f_out);
 
 
 #endif /* TREE_H_ */

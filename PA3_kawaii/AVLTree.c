@@ -10,19 +10,6 @@
 #include <string.h>
 #include "AVLTree.h"
 
-#define UNABLE_TO_ALLOCATE_MEMORY 1
-
-struct tnode{
-	struct tnode *left; //left child
-	struct tnode *right;//right child
-	char *word;
-	int count;
-	int leftLength;// length of left subtree
-	int rightLength; // length of right subtree
-};
-
-typedef struct tnode Tnode;
-
 //Allocates memory for a node on the tree. Returns pointer to allocated space.
 Tnode *mallocNode(){
 	Tnode *root = (Tnode *) malloc(sizeof(Tnode));
@@ -216,12 +203,12 @@ Tnode *oldAddWord(char* string, Tnode *root, int *addedNew){
 	int comparison = strcmp(string, root->word);
 
 	if(comparison < 0){
-		root->left = addWord(string, root->left, addedNew);
+		root->left = oldAddWord(string, root->left, addedNew);
 		if(*addedNew)
 			root->leftLength++;
 	}
 	else if(comparison > 0){
-		root->right = addWord(string, root->right, addedNew);
+		root->right = oldAddWord(string, root->right, addedNew);
 		if(*addedNew)
 			root->rightLength++;
 	}
@@ -302,6 +289,20 @@ Tnode *addWord(char *string, Tnode *root){
 	root = balanceTree(root);
 	return root;
 }//Tnode *addWord(char *string, Tnode *root)
+
+/**
+ * @brief Writes tree to output file
+ * @param root The root node to be printed.
+ * @param f_out The file for the data to be outputted.
+ */
+void writeOutFileTree(struct tnode *root, FILE *f_out){
+   if(root == NULL)
+     return;
+   writeOutFileTree(root -> left, f_out);
+   fprintf(f_out, "%-5.0d %s\n", root -> count, root -> word);
+   writeOutFileTree(root ->right, f_out);
+}
+
 int test1(){
 	Tnode *root = NULL;
 
