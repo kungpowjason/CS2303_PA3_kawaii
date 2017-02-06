@@ -93,6 +93,18 @@ void printTree(struct tnode *root){
    if(root == NULL)
      return;
    printTree(root -> left);
-   printf("%20.20s %d\n",root -> word, root -> count);
+   printf("%10.0d %s\n", root -> count, root -> word);
    printTree(root ->right);
+}
+/**
+ * @brief Writes tree to output file
+ * @param root The root node to be printed.
+ * @param f_out The file for the data to be outputted.
+ */
+void writeOutFileTree(struct tnode *root, FILE *f_out){
+   if(root == NULL)
+     return;
+   writeOutFileTree(root -> left, f_out);
+   fprintf(f_out, "%-5.0d %s\n", root -> count, root -> word);
+   writeOutFileTree(root ->right, f_out);
 }
