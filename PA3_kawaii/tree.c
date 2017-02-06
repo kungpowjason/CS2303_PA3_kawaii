@@ -85,6 +85,16 @@ int numNodes(struct tnode* root, int start){
 
 }//int numNodes(struct tnode* root, int start)
 
+int getTotalCount(struct tnode* root, int start){
+	int i = start;
+	if(root == NULL)
+		return 0;
+	i += getTotalCount(root->left, start);
+	i += getTotalCount(root->right, start);
+
+	return i + root->count;
+}//int getTotalCount(struct tnode* root, int start)
+
 //checks to see if tree contains a word
 int containsWord(struct tnode * root, char* string){
 	int size = strcmp(string, root->word);

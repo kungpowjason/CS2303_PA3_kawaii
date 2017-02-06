@@ -245,6 +245,17 @@ int getWordCount(Tnode *root, char* string){
 		return getWordCount(root->right, string);
 }//int getWordCount(Tnode * root, char* word)
 
+//Returns the number of words in the tree
+int getTotalCount(struct tnode* root, int start){
+	int i = start;
+	if(root == NULL)
+		return 0;
+	i += getTotalCount(root->left, start);
+	i += getTotalCount(root->right, start);
+
+	return i + root->count;
+}//int getTotalCount(struct tnode* root, int start)
+
 //Returns number of nodes
 int numNodes(struct tnode* root, int start){
 	if(root == NULL)

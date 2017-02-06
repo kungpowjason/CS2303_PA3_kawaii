@@ -25,6 +25,7 @@ struct tnode *mallocNode();
 int numNodes(struct tnode* root, int start);
 void freeTree(struct tnode *root);
 struct tnode *addWord(char* string, struct tnode *root);
+int getTotalCount(struct tnode* root, int start);
 
 
 #endif /* TREE_H_ */
