@@ -29,9 +29,11 @@ int textToSubstrings(FILE *fp, char **list_2D)
 			lb = NULL; // after you strtok once lb can be NULL forever
 			char *word_cleaned = malloc(MAX_WORD_LENGTH * sizeof(char));
 			stripPunctuation(wb, word_cleaned); // cleans word
+			if(strlen(word_cleaned)){
 			strcpy(list_2D[word_cnt], word_cleaned);
-			free(word_cleaned); // free mem
 			word_cnt++;
+			}
+			free(word_cleaned); // free mem
 		}
 	}
 	free(line); // free mem
@@ -57,14 +59,15 @@ int stripPunctuation(char *c, char *buf) {
 	int start_pt = 0;
 	int end_flag = 0;
 	int start_flag = 0;
+	if (str_len > 0){
 	while (!start_flag || !end_flag){
-		if(!end_flag && strchr(".,?-;:()[]!\"\'", c[str_len - 1 - i]) != NULL){
+		if(!end_flag && strchr(" .,?-;:()[]!\"\'", c[str_len - 1 - i]) != NULL){
 		}
 		else{
 			end_pt = str_len - 1 - i;
 			end_flag = 1;
 		}
-		if(!start_flag && strchr(".,?-;:()[]!\"\'", c[i]) != NULL){
+		if(!start_flag && strchr(" .,?-;:()[]!\"\'", c[i]) != NULL){
 		}
 		else{
 			start_pt = i;
@@ -77,6 +80,8 @@ int stripPunctuation(char *c, char *buf) {
 			index++;
 	}
 	*(str_new + index) = '\0'; // remember to put this at the end for the string
+	strcpy(buf, str_new); // copy new string into buf
+	}
 //	// section removes punctuation chars at the ends of the string
 //	if (strlen > 0) {
 //		for (i = 0; i < str_len ; i++) {
@@ -89,7 +94,6 @@ int stripPunctuation(char *c, char *buf) {
 //		}
 //		*(str_new + index) = '\0'; // remember to put this at the end for the string
 //	}
-	strcpy(buf, str_new); // copy new string into buf
 	free(str_new); // free mem
 	return 0;
 }
