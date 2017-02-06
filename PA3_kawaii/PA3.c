@@ -19,8 +19,7 @@ int main(int argc, char *argv[]) {
 	if (argc < 3) { // expect at least an output file and file_input file.
 		printf("Error: Too Few Arguments\n");
 		exit(EXIT_FAILURE);
-	}
-	else {
+	} else {
 		// argument format:
 		// program(0) outputfile(1) inputfile(2) ...
 		// file input starts at index 2.
@@ -41,12 +40,18 @@ int main(int argc, char *argv[]) {
 		}
 	}
 	// adds all the words into a binary tree
-	for (int i = 0; i < word_cnt; i++){
+	for (int i = 0; i < word_cnt; i++) {
 		proot = addWord(word_arr[i], proot);
 	}
+	printTree(proot);
 	file_output = fopen(argv[1], "w");
 	// print tree
-	printAndWriteTree(proot, file_output);
+	if (!file_output) {
+		printf("Error: Unable To Open File\n");
+		exit(EXIT_FAILURE);
+	} else {
+		writeOutFileTree(proot, file_output);
+	}
 	printf("--------------------------------\n");
 	printf("The program found %d words.\n", word_cnt);
 	fclose(file_output);
