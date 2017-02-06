@@ -61,15 +61,12 @@ int stripPunctuation(char *c, char *buf) {
 	int start_flag = 0;
 	if (str_len > 0){
 	while (!start_flag || !end_flag){
-		if(!end_flag && strchr(" .,?-;:()[]!\"\'", c[str_len - 1 - i]) != NULL){
-		}
-		else{
+		if(!end_flag && strchr(" .,?-;:()[]!\"\'", c[str_len - 1 - i]) == NULL){
 			end_pt = str_len - 1 - i;
 			end_flag = 1;
 		}
-		if(!start_flag && strchr(" .,?-;:()[]!\"\'", c[i]) != NULL){
-		}
-		else{
+
+		if(!start_flag && strchr(" .,?-;:()[]!\"\'", c[i]) == NULL){
 			start_pt = i;
 			start_flag = 1;
 		}
@@ -82,18 +79,6 @@ int stripPunctuation(char *c, char *buf) {
 	*(str_new + index) = '\0'; // remember to put this at the end for the string
 	strcpy(buf, str_new); // copy new string into buf
 	}
-//	// section removes punctuation chars at the ends of the string
-//	if (strlen > 0) {
-//		for (i = 0; i < str_len ; i++) {
-//			if ((i == 0 || (i == str_len - 1)) && strchr(".,?-;:()[]!\"\'", c[i]) != NULL) {
-//			}
-//			else {
-//				*(str_new + index) = tolower(c[i]);
-//				index++;
-//			}
-//		}
-//		*(str_new + index) = '\0'; // remember to put this at the end for the string
-//	}
 	free(str_new); // free mem
 	return 0;
 }
