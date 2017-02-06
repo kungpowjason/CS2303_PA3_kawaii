@@ -6,6 +6,7 @@
 #include "timestamp.h"
 #include "wordparse.h"
 #include "tree.h"
+#include "AVLTree.h"
 
 int main(int argc, char *argv[]) {
 
@@ -61,6 +62,9 @@ int main(int argc, char *argv[]) {
 	printf("--------------------------------\n");
 	printf("%10d Distinct words\n", numNodes(proot, 0));
 	printf("%10d Total words counted (including duplicates)\n\n", word_cnt);
+//	fprintf("--------------------------------\n");
+//	fprintf("%10d Distinct words\n", numNodes(proot, 0));
+//	fprintf("%10d Total words counted (including duplicates)\n\n", word_cnt);
 	fclose(file_output);
 
 	/** PRINT TIME STAMP INFORMATION **/

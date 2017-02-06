@@ -61,12 +61,12 @@ int stripPunctuation(char *c, char *buf) {
 	int start_flag = 0;
 	if (str_len > 0){
 	while (!start_flag || !end_flag){
-		if(!end_flag && strchr(" .,?-;:()[]!\"\'", c[str_len - 1 - i]) == NULL){
+		if(!end_flag && strchr(" &.,?-;:()|[]!\"\'", c[str_len - 1 - i]) == NULL){
 			end_pt = str_len - 1 - i;
 			end_flag = 1;
 		}
 
-		if(!start_flag && strchr(" .,?-;:()[]!\"\'", c[i]) == NULL){
+		if(!start_flag && strchr(" &.,?-;:()|[]!\"\'", c[i]) == NULL){
 			start_pt = i;
 			start_flag = 1;
 		}

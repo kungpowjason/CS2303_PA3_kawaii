@@ -3,7 +3,7 @@
 
 #define MAX_WORDS_LINE 200
 #define MAX_WORD_LENGTH 20
-#define MAX_WORDS 10000
+#define MAX_WORDS 100000
 
 int textToSubstrings(FILE *fp, char **list_2D);
 int stripPunctuation(char *c, char *buf);
