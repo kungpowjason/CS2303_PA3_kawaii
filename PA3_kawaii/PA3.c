@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/time.h>
+#include <unistd.h>
 #include <string.h>
+#include "timestamp.h"
 #include "wordparse.h"
 #include "tree.h"
 
@@ -12,6 +15,10 @@ int main(int argc, char *argv[]) {
 	char **word_arr; // declare 2D pointer bin
 	struct tnode *proot = NULL;
 	int word_cnt = 0;
+
+	struct timeval start_time; // time stamps for start and end of sorting
+	struct timeval end_time;
+	struct timeval job_time; // Elapsed time while doing the job
 
 	alloc_mem_2D(&word_arr); // allocate memory for word_arr
 
@@ -37,9 +44,11 @@ int main(int argc, char *argv[]) {
 		}
 	}
 	// adds all the words into a binary tree
+	gettimeofday(&start_time, NULL); // Get timestamp at start
 	for (int i = 0; i < word_cnt; i++) {
 		proot = addWord(word_arr[i], proot);
 	}
+	gettimeofday(&end_time, NULL); // Get timestamp at end
 	printTree(proot);
 	file_output = fopen(argv[1], "w");
 	// print tree
@@ -51,8 +60,21 @@ int main(int argc, char *argv[]) {
 	}
 	printf("--------------------------------\n");
 	printf("%10d Distinct words\n", numNodes(proot, 0));
-	printf("%10d Total words counted (including duplicates)\n", word_cnt);
+	printf("%10d Total words counted (including duplicates)\n\n", word_cnt);
 	fclose(file_output);
+
+	/** PRINT TIME STAMP INFORMATION **/
+
+	printf("Timestamp before: ");
+	print_timeval(start_time);
+	printf("Timestamp after: ");
+	print_timeval(end_time);
+
+	/* This next line fills in the fields of a timeval struct
+	 with the difference between the two timestamps. */
+	job_time = timediff(start_time, end_time);
+	printf("Time difference: ");
+	print_timeval(job_time);
 
 	freeTree(proot);
 	proot = NULL;
